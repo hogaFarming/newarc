@@ -6,6 +6,6 @@ export async function getUsers() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockRecords);
-    }, 200);
+    }, 10);
   });
 }

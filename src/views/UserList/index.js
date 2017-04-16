@@ -1,26 +1,30 @@
 import React from 'react';
-import { getUsers } from '../../api/user';
+import { connect } from 'react-redux';
+import { connectViewModel } from '../../view-models';
+import vmUserList from '../../view-models/user-list';
 
-function UserList({
-    records = mockRecords
-  }) {
+
+const UserList = ({ records, fetchUserList }) => {
   return (
     <div>
       <h2>user list</h2>
+      <button onClick={() => { fetchUserList(); }}>fetch</button>
       <table>
-        <tr>
-          <th>姓名</th>
-          <th>年龄</th>
-        </tr>
-        {records.map(rec => (
-          <tr key={rec.name}>
-            <td>{rec.name}</td>
-            <td>{rec.age}</td>
+        <tbody>
+          <tr>
+            <th>姓名</th>
+            <th>年龄</th>
           </tr>
-        ))}
+          {records.map(rec => (
+            <tr key={rec.name}>
+              <td>{rec.name}</td>
+              <td>{rec.age}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
 }
 
-export default UserList;
+export default connectViewModel(vmUserList)(UserList);
